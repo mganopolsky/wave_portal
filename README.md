@@ -1,6 +1,11 @@
 # Basic Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This is a basic solidty project from BUILDSPACE that implements a basic Wave Portal with a smart contract.
+
+You can interact with the deployed smart contract with a REACT FE here: 
+https://waveportal-starter-project.marinaganopols1.repl.co/
+
+In order to send a wave, you have to have a Metamask extension installed on your browser.
 
 Try running some of the following tasks:
 
