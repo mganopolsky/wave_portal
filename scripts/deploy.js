@@ -4,42 +4,55 @@ const main = async () => {
     console.log("owner is: ", owner.address);
 
     const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-    const waveContract = await waveContractFactory.deploy();
+    const waveContract = await waveContractFactory.deploy({
+      value: hre.ethers.utils.parseEther("0.1"),
+    });
     await waveContract.deployed();
 
     console.log("Marina's Wave Contract deployed to:", waveContract.address);
     console.log("Contract deployed by:", owner.address);
 
+    let contractBalance = await hre.ethers.provider.getBalance(
+      waveContract.address
+    );
+
+    console.log(
+      "Contract balance",
+      hre.ethers.utils.formatEther(contractBalance)
+    );
+
     let waveCount;
     waveCount = await waveContract.getTotalMessageCount();
     console.log("Initial wave count:", waveCount);
 
-    let waveTxn = await waveContract.wave();
+    let waveTxn = await waveContract.wave("My First Wave!");
 
     waveCount = await waveContract.getTotalMessageCount();
     console.log("Intermediate wave count:", waveCount);
 
-    await waveContract.sendMessage("Hello");
-    await waveContract.sendMessage("Mothafuckah");
+    contractBalance = await hre.ethers.provider.getBalance(
+      waveContract.address
+    );
+    console.log(
+      "Contract balance",
+      hre.ethers.utils.formatEther(contractBalance)
+    );
 
-    await waveContract.sendMessage("Hey Ho");
+    await waveContract.wave("Hello");
+    await waveContract.wave("Mothafuckah");
 
-    await waveContract.sendMessage("How you derrrrn");
+    await waveContract.wave("Hey Ho");
+
+    await waveContract.wave("How you derrrrn");
 
     waveCount = await waveContract.getMessageCountBySource(owner.address);
     console.log("Final message count by source %s: %i", owner.address, waveCount);
 
-    const sentMessages = await waveContract.getMessagesBySource(owner.address);
-    console.log("Messages sent by %s: ", owner.address, sentMessages);
-
-    //waveTxn = await waveContract.connect(randomPerson1.address).wave();
-    //await waveTxn.wait();
-
-//    waveTxn = await waveContract.connect(randomPerson2.address).wave();
-//    await waveTxn.wait();
-
     waveCount = await waveContract.getTotalMessageCount();
     console.log("Final wave count:", waveCount);
+
+    let allWaves = await waveContract.getAllWaves();
+    console.log(allWaves);
   };
   
   const runMain = async () => {
