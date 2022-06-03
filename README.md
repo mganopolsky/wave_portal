@@ -1,6 +1,6 @@
-# Basic Sample Hardhat Project
+# Basic Web3 Wave Portal
 
-This is a basic solidty project from BUILDSPACE that implements a basic Wave Portal with a smart contract.
+This is a solidty project from BUILDSPACE that implements a basic Wave Portal with a smart contract.
 
 You can interact with the deployed smart contract with a REACT FE here:
 <https://waveportal-starter-project.marinaganopols1.repl.co/>
